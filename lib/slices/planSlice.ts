@@ -53,10 +53,24 @@ export const deletePlan = createAsyncThunk('plans/deletePlan', async (id: string
   }
 });
 
+// Reorder plans
+export const reorderPlansAction = createAsyncThunk('plans/reorderPlans', async (orders: { id: string, order: number }[], { rejectWithValue }) => {
+  try {
+    const response = await api.put('/plan/reorder', { orders });
+    return response.data;
+  } catch (error: any) {
+    return rejectWithValue(error.response?.data?.message || 'Failed to reorder plans');
+  }
+});
+
 const planSlice = createSlice({
   name: 'plans',
   initialState,
-  reducers: {},
+  reducers: {
+    reorderLocal: (state, action) => {
+      state.items = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPlans.pending, (state) => {
@@ -86,4 +100,5 @@ const planSlice = createSlice({
   },
 });
 
+export const { reorderLocal } = planSlice.actions;
 export default planSlice.reducer;
