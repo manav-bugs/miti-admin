@@ -24,6 +24,7 @@ export function PlanModal({ isOpen, onClose, onSave, initialData }: PlanModalPro
     isActive: true,
     isFree: false,
     isPopular: false,
+    funnyNote: '',
     order: 0,
     features: ['']
   });
@@ -48,6 +49,7 @@ export function PlanModal({ isOpen, onClose, onSave, initialData }: PlanModalPro
           isActive: true,
           isFree: false,
           isPopular: false,
+          funnyNote: '',
           order: 0,
           features: ['']
         });
@@ -263,14 +265,26 @@ export function PlanModal({ isOpen, onClose, onSave, initialData }: PlanModalPro
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Admin Description</label>
-                  <textarea
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-5 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-[11px] font-bold min-h-[80px] focus:outline-none focus:bg-surface"
-                    placeholder="Short internal summary for the plan..."
-                  />
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Funny Note</label>
+                    <input
+                      type="text"
+                      value={formData.funnyNote}
+                      onChange={(e) => setFormData({ ...formData, funnyNote: e.target.value })}
+                      placeholder="e.g. Cheaper than a plate of Chaat."
+                      className="w-full px-5 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Admin Description</label>
+                    <textarea
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      className="w-full px-5 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-[11px] font-bold min-h-[50px] focus:outline-none focus:bg-surface"
+                      placeholder="Short internal summary..."
+                    />
+                  </div>
                 </div>
               </form>
             </div>
