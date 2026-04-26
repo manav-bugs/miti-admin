@@ -115,10 +115,22 @@ export default function PlansPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   layout
-                  className="w-[380px] bg-surface-container-lowest rounded-[3.5rem] border border-outline-variant shadow-xl hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 cursor-grab active:cursor-grabbing relative overflow-hidden flex flex-col group"
+                  className={`w-[380px] rounded-[3.5rem] border shadow-xl hover:shadow-2xl transition-all duration-500 cursor-grab active:cursor-grabbing relative overflow-hidden flex flex-col group ${
+                    plan.isPopular 
+                    ? 'bg-surface-container-lowest border-primary shadow-primary/10 ring-4 ring-primary/5 scale-[1.02]' 
+                    : 'bg-surface-container-lowest border-outline-variant hover:shadow-primary/10'
+                  }`}
                 >
+                  {/* Popular Badge */}
+                  {plan.isPopular && (
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-6 py-2 rounded-b-2xl z-20 flex items-center gap-2 shadow-lg">
+                      <Zap className="w-3.5 h-3.5 fill-current" />
+                      <span className="text-[10px] font-black uppercase tracking-widest">Most Popular</span>
+                    </div>
+                  )}
+
                   {/* Premium Header Decoration */}
-                  <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary/[0.03] to-transparent pointer-events-none" />
+                  <div className={`absolute top-0 left-0 right-0 h-24 pointer-events-none ${plan.isPopular ? 'bg-gradient-to-b from-primary/10 to-transparent' : 'bg-gradient-to-b from-primary/[0.03] to-transparent'}`} />
                   
                   {/* Top Bar with Actions & Drag Handle */}
                   <div className="p-8 flex items-center justify-between relative z-10">
@@ -138,7 +150,7 @@ export default function PlansPage() {
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
-                    <div className="w-12 h-12 bg-surface-container-low rounded-2xl flex items-center justify-center text-outline-variant group-hover:text-primary transition-colors touch-none shadow-sm">
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors touch-none shadow-sm ${plan.isPopular ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-outline-variant group-hover:text-primary'}`}>
                       <GripVertical className="w-6 h-6" />
                     </div>
                   </div>

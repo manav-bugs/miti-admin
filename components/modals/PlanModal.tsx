@@ -23,6 +23,7 @@ export function PlanModal({ isOpen, onClose, onSave, initialData }: PlanModalPro
     description: '',
     isActive: true,
     isFree: false,
+    isPopular: false,
     order: 0,
     features: ['']
   });
@@ -46,6 +47,7 @@ export function PlanModal({ isOpen, onClose, onSave, initialData }: PlanModalPro
           description: '',
           isActive: true,
           isFree: false,
+          isPopular: false,
           order: 0,
           features: ['']
         });
@@ -208,6 +210,7 @@ export function PlanModal({ isOpen, onClose, onSave, initialData }: PlanModalPro
                     { key: 'canChat', label: 'Can Chat', icon: <Zap className="w-3.5 h-3.5" /> },
                     { key: 'isVIP', label: 'VIP Plan', icon: <BadgeCheck className="w-3.5 h-3.5" /> },
                     { key: 'searchPriority', label: 'Priority', icon: <Star className="w-3.5 h-3.5" /> },
+                    { key: 'isPopular', label: 'Popular', icon: <Zap className="w-3.5 h-3.5" /> },
                     { key: 'isFree', label: 'Reg Free', icon: <Gift className="w-3.5 h-3.5" /> },
                   ].map((feat) => (
                     <button
