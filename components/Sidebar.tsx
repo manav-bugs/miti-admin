@@ -14,7 +14,8 @@ import {
   BarChart3, 
   BadgeCheck, 
   Settings,
-  ShieldCheck
+  ShieldCheck,
+  LayoutList
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -27,12 +28,17 @@ const menuItems = [
   { name: 'Content', icon: BookOpen, href: '/content' },
   { name: 'Master Data', icon: Database, href: '/master-data' },
   { name: 'Reports', icon: BarChart3, href: '/reports' },
+  { name: 'Plans', icon: LayoutList, href: '/plans' },
   { name: 'Staff', icon: BadgeCheck, href: '/staff' },
   { name: 'Settings', icon: Settings, href: '/settings' },
 ];
 
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
+
 export default function Sidebar() {
   const pathname = usePathname();
+  const { user } = useSelector((state: RootState) => state.auth);
 
   return (
     <aside className="w-64 h-screen sticky left-0 top-0 bg-white/70 backdrop-blur-xl flex flex-col border-r border-outline-variant z-50">
@@ -68,18 +74,12 @@ export default function Sidebar() {
       </nav>
 
       <div className="p-8 border-t border-outline-variant/30 flex items-center gap-3 mt-auto bg-surface-container-low/50">
-        <div className="relative w-10 h-10 overflow-hidden rounded-full border-2 border-primary">
-           <Image 
-            src="https://picsum.photos/seed/admin/100/100" 
-            alt="Admin" 
-            fill 
-            className="object-cover"
-            referrerPolicy="no-referrer"
-          />
+        <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-primary flex items-center justify-center text-white text-xs font-bold uppercase border-2 border-primary/20">
+           {user?.fullName?.charAt(0) || 'A'}
         </div>
         <div className="flex flex-col min-w-0">
-          <span className="text-xs font-bold text-on-surface truncate">Anand Sindhi</span>
-          <span className="text-[10px] text-on-surface-variant uppercase tracking-tighter font-bold">Super Admin</span>
+          <span className="text-xs font-bold text-on-surface truncate">{user?.fullName || 'Anand Sindhi'}</span>
+          <span className="text-[10px] text-on-surface-variant uppercase tracking-tighter font-bold">{user?.role === 'admin' ? 'Super Admin' : 'Staff'}</span>
         </div>
       </div>
     </aside>

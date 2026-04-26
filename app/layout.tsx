@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Noto_Serif } from 'next/font/google';
-import Sidebar from '@/components/Sidebar';
-import TopNav from '@/components/TopNav';
+import { Providers } from '@/components/Providers';
+import { DashboardLayout } from '@/components/DashboardLayout';
 import './globals.css';
 
 const inter = Inter({
@@ -15,21 +15,19 @@ const notoSerif = Noto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: 'MitiMighty | Heritage Curator',
+  title: 'MitiMighty | Admin Central',
   description: 'Elite Heritage Curators and Matrimonial Registry for Sindhi Families.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoSerif.variable}`}>
-      <body suppressHydrationWarning className="bg-surface text-on-surface flex min-h-screen font-sans">
-        <Sidebar />
-        <div className="flex-1 flex flex-col min-w-0">
-          <TopNav />
-          <main className="flex-1 overflow-auto">
+      <body suppressHydrationWarning className="bg-surface text-on-surface font-sans">
+        <Providers>
+          <DashboardLayout>
             {children}
-          </main>
-        </div>
+          </DashboardLayout>
+        </Providers>
       </body>
     </html>
   );
